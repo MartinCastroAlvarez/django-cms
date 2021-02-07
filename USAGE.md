@@ -30,13 +30,13 @@ export MALAGA_DB_HOST="0.0.0.0"
 export MALAGA_DB_PORT="5432"
 export MALAGA_DB_PASS="beridyfycuuult"
 export MALAGA_DB_USER="psql"
-export MALAGA_DB_NAME="malaga"
+export MALAGA_DB_NAME="malaga_database"
 ```
 ##### Run a PostgreSQL Docker Container
 ```bash
-docker rm -f "MalagaPostgreSQL"
+docker rm -f "MalagaDatabase"
 docker run -d \
-    --name "MalagaPostgreSQL" \
+    --name "MalagaDatabase" \
     -e POSTGRES_DB="${MALAGA_DB_NAME}" \
     -e POSTGRES_USER="${MALAGA_DB_USER}" \
     -e POSTGRES_PASSWORD="${MALAGA_DB_PASS}" \
@@ -45,7 +45,7 @@ docker run -d \
 ```
 ##### Verify the Docker is Running
 ```bash
-docker ps | grep MalagaPostgreSQL
+docker ps | grep MalagaDatabase
 ```
 ##### Run migrations
 ```bash

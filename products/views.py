@@ -5,7 +5,7 @@ can be the HTML contents of a Web page, or a redirect, or a
 404 error, or an XML document, or an image . . . or anything, really.
 """
 
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, Page
 from django.db.models.query import QuerySet
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect

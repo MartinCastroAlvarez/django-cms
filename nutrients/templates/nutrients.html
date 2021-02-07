@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "title" %}Nutrients{% endblock %}
+
+{% block "body" %}
+
+    {# List of Nutrients #}
+    <div class="card">
+        <img class="card-img-top" src="{% static "nutrients-template.jpeg" %}" alt="nutrients">
+        <div class="card-body">
+            <h3 class="card-title">Nutrients</h3>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            {% for nutrient in page.object_list %}
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url "nutrients.details" nutrient_pk=nutrient.id %}">{{ nutrient.name }}</a>
+                    </div>
+                    <div class="col">{{ nutrient.get_unit_display }}</div>
+                </div class="row">
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {# Pagination #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Filter by Page</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                {% if page.has_previous %}
+                    <a href="{% url "nutrients.list" %}?status={{status}}&name={{name}}&offset={{page.previous_page_number}}"
+                       class="btn btn-dark">{{ page.previous_page_number }}</a>
+                {% endif %}
+                <a class="btn btn-dark disabled">{{ page.number }}</a>
+                {% if page.has_next %}
+                    <a href="{% url "nutrients.list" %}?status={{status}}&name={{name}}&offset={{page.next_page_number}}"
+                       class="btn btn-dark" >{{ page.next_page_number }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+    {# Filter by Name #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Filter by Name</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "nutrients.list" %}" method="get">
+                <input name="name" type="text" value="{{ name }}"/>
+                <button class="btn btn-dark" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    {# New Nutrient Form #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add Nutrient</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "nutrients.list" %}" method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="row">
+                    <div class="col">
+                        {{ form.name.errors }}
+                        <label for="{{ form.name.id_for_label }}">Name:</label>
+                        <br/>
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.unit.errors }}
+                        <label for="{{ form.unit.id_for_label }}">Status</label>
+                        <br/>
+                        {{ form.unit }}
+                    </div>
+                </div>
+                <button class="btn btn-success" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

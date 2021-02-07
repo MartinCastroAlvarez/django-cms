@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "title" %}{{ nutrient.product.name }}{% endblock %}
+
+{% block "body" %}
+
+    {# Nutrient Details #}
+    <div class="card">
+        <img class="card-img-top" src="{% static "product-nutrient-template.jpeg" %}" alt="nutrient">
+        <div class="card-body">
+            <h1 class="card-title">{{ nutrient.product.name }}</h1>
+            <h6 class="card-subtitle mb-2 text-muted">{{ nutrient.product.get_status_display }}</h6>
+            <p>
+                Click
+                <a href="{% url "products.details" product_pk=nutrient.product.pk %}">here</a>
+                to manage this Product.
+            </p>
+            <h3 class="card-title">{{ nutrient.nutrient.name }}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">{{ nutrient.value}} {{ nutrient.nutrient.get_unit_display }}</h6>
+        </div>
+    </div>
+
+    {# Delete Product Nutrient #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Delete Product Nutrient</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "products.nutrients.details" product_pk=nutrient.product.pk nutrient_pk=nutrient.nutrient.pk%}" method="post">
+                {% csrf_token %}
+                <button class = "btn btn-danger" name="__delete" value="{{ nutrient.pk }}">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    {# Update Product Nutrient Form #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Update Product Nutrient</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "products.nutrients.details" product_pk=nutrient.product.id nutrient_pk=nutrient.nutrient.pk%}" method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="row">
+                    <div class="col">
+                        {{ form.value.errors }}
+                        <label for="{{ form.value.id_for_label }}">Value:</label>
+                        <br/>
+                        {{ form.value }}
+                    </div>
+                </div>
+                <button class="btn btn-dark" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

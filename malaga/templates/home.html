@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "title" %}Home{% endblock %}
+{% block "body" %}
+
+    {# Landing Page #}
+    <div class="card">
+        <img class="card-img-top" src="{% static "home.jpeg" %}" alt="home">
+        <div class="card-body">
+            <h1 class="card-title">Home</h1>
+            <h6 class="card-subtitle mb-2 text-muted">This is a sample app using Django Forms and Templates.</h6>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+               do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+               reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+               pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+               qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+               do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+               reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+               pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+               qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+    </div>
+
+    {# Nutrients #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Nutrients</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <p>
+                Click 
+                <a href="{% url "products.list" %}">here</a>
+                to manage the list of Nutrients.
+            </p>
+        </div>
+    </div>
+
+    {# Products #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Prodcuts</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <p>
+                Click 
+                <a href="{% url "products.list" %}">here</a>
+                to manage the list of Products.
+            </p>
+        </div>
+    </div>
+
+{% endblock %}

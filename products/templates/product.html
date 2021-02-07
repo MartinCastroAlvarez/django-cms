@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "title" %}{{ product.name }}{% endblock %}
+
+{% block "body" %}
+
+    {# Product Details #}
+    <div class="card">
+        <img class="card-img-top" src="{% static "product-template.jpeg" %}" alt="product">
+        <div class="card-body">
+            <h1 class="card-title">{{ product.name }}</h1>
+            <h6 class="card-subtitle mb-2 text-muted">{{ product.get_status_display }}</h6>
+            <p>{{ product.description }}</p>
+        </div>
+    </div>
+
+    {# Delete Product #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Delete Product</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "products.details" product_pk=product.id %}" method="post">
+                {% csrf_token %}
+                <button class = "btn btn-danger" name="__delete" value="{{ product.id }}">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    {# Nutrients #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Nutrients</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <p>
+                Click 
+                <a href="{% url "products.nutrients.list" product_pk=product.pk %}">here</a>
+                to manage the list of Nutrients of this Product.
+            </p>
+        </div>
+    </div>
+
+    {# Update Product Form #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Update Product</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "products.details" product_pk=product.id %}" method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="row">
+                    <div class="col">
+                        {{ form.name.errors }}
+                        <label for="{{ form.name.id_for_label }}">Name:</label>
+                        <br/>
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.description.errors }}
+                        <label for="{{ form.description.id_for_label }}">Description:</label>
+                        <br/>
+                        {{ form.description }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.status.errors }}
+                        <label for="{{ form.status.id_for_label }}">Status</label>
+                        <br/>
+                        {{ form.status }}
+                    </div>
+                </div>
+                <button class="btn btn-dark" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

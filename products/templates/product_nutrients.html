@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "title" %}{{ product.name }}{% endblock %}
+
+{% block "body" %}
+
+    {# List of Nutrients #}
+    <div class="card">
+        <img class="card-img-top" src="{% static "product-nutrients-template.jpeg" %}" alt="nutrient">
+        <div class="card-body">
+            <h1 class="card-title">{{ product.name }}</h1>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            {% for nutrient in nutrients %}
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url "products.nutrients.details" product_pk=product.id nutrient_pk=nutrient.nutrient.pk%}">{{ nutrient.nutrient.name }}</a>
+                    </div>
+                    <div class="col">{{ nutrient.value }}</div>
+                    <div class="col">{{ nutrient.nutrient.get_unit_display }}</div>
+                </div class="row">
+            {% endfor %}
+        </div>
+    </div>
+
+    {# New Nutrient Form #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add Nutrient</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "products.nutrients.list" product_pk=product.pk %}" method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {{ form.product.errors }}
+                <div class="row">
+                    <div class="col">
+                        {{ form.nutrient.errors }}
+                        <label for="{{ form.description.id_for_label }}">Nutrient:</label>
+                        <br/>
+                        {{ form.nutrient }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.value.errors }}
+                        <label for="{{ form.status.id_for_label }}">Value:</label>
+                        <br/>
+                        {{ form.value }}
+                    </div>
+                </div>
+                <button class="btn btn-success" type="submit">Create</button>
+                <input type="hidden" name="product" value="{{ product.pk }}"/>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "title" %}Products{% endblock %}
+
+{% block "body" %}
+
+    {# List of Products #}
+    <div class="card">
+        <img class="card-img-top" src="{% static "products-template.jpeg" %}" alt="products">
+        <div class="card-body">
+            <h1 class="card-title">Products</h1>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            {% for product in page.object_list %}
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url "products.details" product_pk=product.id %}">{{ product.name }}</a>
+                    </div>
+                    <div class="col">{{ product.get_status_display }}</div>
+                </div class="row">
+            {% endfor %}
+        </div>
+    </div>
+
+    {# Pagination #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Filter by Page</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                {% if page.has_previous %}
+                    <a href="{% url "products.list" %}?status={{status}}&name={{name}}&offset={{page.previous_page_number}}"
+                       class="btn btn-dark">{{ page.previous_page_number }}</a>
+                {% endif %}
+                <a class="btn btn-dark disabled">{{ page.number }}</a>
+                {% if page.has_next %}
+                    <a href="{% url "products.list" %}?status={{status}}&name={{name}}&offset={{page.next_page_number}}"
+                       class="btn btn-dark" >{{ page.next_page_number }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {# Filter by Status #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Filter By Status</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{% url "products.list"%}?name={{ name }}&status="
+                   class="btn btn-info {% if not status %}disabled{% endif %}">All</a>
+
+                {% for s in Status %}
+                    <a href="{% url "products.list"%}?name={{ name }}&status={{s.value}}"
+                       class="btn btn-info {% if s.value == status %}disabled{% endif %}">{{ s.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {# Filter by Name #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Filter By Name</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "products.list" %}" method="get">
+                <input name="name" type="text" value="{{ name }}"/>
+                <input name="status" value="{{ status }}" type="hidden"/>
+                <button class="btn btn-dark" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    {# New Product Form #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add Product</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "products.list" %}" method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="row">
+                    <div class="col">
+                        {{ form.name.errors }}
+                        <label for="{{ form.name.id_for_label }}">Name:</label>
+                        <br/>
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.description.errors }}
+                        <label for="{{ form.description.id_for_label }}">Description:</label>
+                        <br/>
+                        {{ form.description }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.status.errors }}
+                        <label for="{{ form.status.id_for_label }}">Status</label>
+                        <br/>
+                        {{ form.status }}
+                    </div>
+                </div>
+                <button class="btn btn-success" type="submit">Create:</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

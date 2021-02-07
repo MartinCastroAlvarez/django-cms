@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "title" %}{{ nutrient.name }}{% endblock %}
+
+{% block "body" %}
+
+    {# Nutrient Details #}
+    <div class="card">
+        <img class="card-img-top" src="{% static "nutrient-template.jpeg" %}" alt="nutrient">
+        <div class="card-body">
+            <h1 class="card-title">{{ nutrient.name }}</h1>
+            <h6 class="card-subtitle mb-2 text-muted">{{ nutrient.get_unit_display }}</h6>
+        </div>
+    </div>
+
+    {# Delete Nutrient #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Delete Nutrient</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "nutrients.details" nutrient_pk=nutrient.id %}" method="post">
+                {% csrf_token %}
+                <button class = "btn btn-danger" name="__delete" value="{{ nutrient.id }}">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    {# Update Nutrient Form #}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Update Nutrient</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form action="{% url "nutrients.details" nutrient_pk=nutrient.id %}" method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="row">
+                    <div class="col">
+                        {{ form.name.errors }}
+                        <label for="{{ form.name.id_for_label }}">Name:</label>
+                        <br/>
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.unit.errors }}
+                        <label for="{{ form.unit.id_for_label }}">Status</label>
+                        <br/>
+                        {{ form.unit }}
+                    </div>
+                </div>
+                <button class="btn btn-dark" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

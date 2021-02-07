@@ -1,0 +1,10 @@
+body {}
+.card {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+.btn {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    border-radius: 0px;
+}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "title" %}Login{% endblock %}
+
+{% block "body" %}
+    <div class="card">
+        <img class="card-img-top" src="{% static "login.jpeg" %}" alt="login">
+        <div class="card-body">
+            <h1 class="card-title">Login!</h1>
+            <h6 class="card-subtitle mb-2 text-muted">Lorem Ipsum Dolor Sit Amet</h6>
+            <form method="post" action="{% url 'users.login' %}">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="row">
+                    <div class="col">
+                        {{ form.username.errors }}
+                        <label for="{{ form.username.id_for_label }}">Username:</label>
+                        <br/>
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form.password.errors }}
+                        <label for="{{ form.password.id_for_label }}">Name:</label>
+                        <br/>
+                        {{ form.password}}
+                    </div>
+                </div>
+                <button class="btn btn-dark" type="submit">Login</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+            <p>
+                Click
+                <a href="{% url 'users.signup' %}?next={{ next }}">here</a>
+                to Sign Up.
+            </p>
+        </div>
+    </div>
+{% endblock %}

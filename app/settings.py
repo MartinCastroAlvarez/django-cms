@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import sys
 import typing
 
 from pathlib import Path
@@ -69,7 +70,7 @@ WSGI_APPLICATION: str = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASES = {
+DATABASES: dict = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ['MALAGA_DB_NAME'],
@@ -79,6 +80,11 @@ DATABASES = {
         'PORT': os.environ['MALAGA_DB_PORT'],
     }
 }
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'unit_tests_database'
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

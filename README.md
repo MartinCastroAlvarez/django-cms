@@ -17,3 +17,16 @@ You work for a restaurant chain, and your manager has asked you to create a smal
 - [Product Module](./product/README.md)
 - [Deployment Guide](./USAGE.md)
 - [Test Framework](./TEST.md)
+
+## Screenshots
+![alt-img](./screenshots/sample1.png)
+![alt-img](./screenshots/sample2.png)
+![alt-img](./screenshots/sample3.png)
+![alt-img](./screenshots/sample4.png)
+![alt-img](./screenshots/sample5.png)
+![alt-img](./screenshots/sample6.png)
+![alt-img](./screenshots/sample7.png)
+![alt-img](./screenshots/sample8.png)
+![alt-img](./screenshots/sample9.png)
+![alt-img](./screenshots/sample10.png)
+![alt-img](./screenshots/sample11.png)

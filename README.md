@@ -19,14 +19,35 @@ You work for a restaurant chain, and your manager has asked you to create a smal
 - [Test Framework](./TEST.md)
 
 ## Screenshots
+
+#### Home View
 ![alt-img](./screenshots/sample1.png)
+
+#### Login View
 ![alt-img](./screenshots/sample2.png)
+
+#### SignUp View
 ![alt-img](./screenshots/sample3.png)
+
+#### Nutrients List View
 ![alt-img](./screenshots/sample4.png)
 ![alt-img](./screenshots/sample5.png)
+
+#### Nutrient Details View
 ![alt-img](./screenshots/sample6.png)
+
+#### Products List View
 ![alt-img](./screenshots/sample7.png)
+
+#### Product Details View
 ![alt-img](./screenshots/sample8.png)
 ![alt-img](./screenshots/sample9.png)
+
+#### Product Nutrients List View
 ![alt-img](./screenshots/sample10.png)
+
+#### Product Nutrient Details View
 ![alt-img](./screenshots/sample11.png)
+
+#### Logout View
+![alt-img](./screenshots/sample12.png)
